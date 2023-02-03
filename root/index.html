@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <style>
+            .title1 {
+                background-color: rgb(8, 97, 98);
+            }
+            .title2 {
+                background-color: rgb(254, 7, 7);
+            }
+        </style>
+        <script src="./manchot.js"></script>
+        <script>
+            var xmlns = "http://www.w3.org/2000/svg";
+
+            function clearSvg() {
+                var a = document.getElementById('svgArea');
+                var children = a.getElementsByClassName('enfant')
+                for (var i=children.length - 1; i>=0; i--) {
+                    children[i].remove()
+                }
+            } 
+
+            function changeSvg() {
+              var val_A = document.getElementById('a').value * 1;
+              var val_B = document.getElementById('b').value * 1;
+              var val_C = document.getElementById('c').value * 1;
+              var val_D = document.getElementById('d').value * 1;
+
+              var a = document.getElementById('svgArea');
+
+            // y = Ax4 + Bx3 + Cx2 + Dx + 0
+            for (var X=-300; X<300;X=X+0.5) {
+                // -- Create something
+               var y = (val_A * X * X * X * X) + (val_B * X * X * X) + (val_C * X * X) + (val_D * X)
+
+               var myCircle = createCircle(X+600, 300 - y)
+               a.appendChild(myCircle)
+              }
+
+              
+            
+            }
+
+            function createCircle(x,y) {
+                var circle = document.createElementNS(xmlns, "circle");
+                circle.setAttribute('class', 'enfant')
+                circle.setAttributeNS(null, 'stroke', "green");
+                circle.setAttributeNS(null, 'stroke-width', 3);
+                circle.setAttributeNS(null, 'cx', x);
+                circle.setAttributeNS(null, 'cy', y);
+                circle.setAttributeNS(null, 'r', 2);
+                return circle;
+            }
+
+        </script>
+    </head>
+    <body>
+        <h1 class="title1" id="mainTitle">manchot2</h1>
+        <div>
+            y = Ax + B
+            <br>
+            a:
+            b:
+            <br>
+            a:
+            <input id="a"></input>
+            b:
+            <input id="b"></input>
+            c:
+            <input id="c"></input>
+            d:
+            <input id="d"></input>
+            <br>
+            <button onclick="clearSvg()">Clear</button>
+            <button onclick="changeSvg()">Draw</button>
+        </div>
+         <div>
+            <svg id="svgArea" height="600" width="1200">
+                <path stroke="blue" stroke-width="2" d="M 0 300 H 1200 300 M 600 0 L 600 600" />
+            </svg>
+         </div>
+         test<br>
+         <a href=manchot.html>retour</a>
+    </body>
+</html>
